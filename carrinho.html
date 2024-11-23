@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Loja Online</h1>
+        <div class="carrinho-badge">
+            <a href="#">
+                <i class="bi bi-cart icone-carrinho"></i>
+                <span class="contador">3</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="carrinho">
+        <div class="total">
+            <p id="total-preco">Total: R$ 0,00</p>
+            <button class="botao-comprar">Finalizar Compra</button>
+        </div>
+    </main>
+    <script> 
+        let carrinho = JSON.parse(localStorage.getItem('carrinho'));
+        const listaCarrinho = document.querySelector('.carrinho');
+        const totalPreco = document.querySelector('#total-preco');
+
+        function removerItem(index) { 
+            carrinho.splice(index, 1); 
+            localStorage.setItem('carrinho', JSON.stringify(carrinho)); 
+            carregarCarrinho(); 
+        }
+        for (let index = 0; index < carrinho.length; index++) {
+            botaoRemover[index].addEventListener('click', removerItem(index))
+        }
+        function carregarCarrinho() {
+            let total = 0;
+            carrinho.forEach(produto => {
+                const itemCarrinho = document.createElement('div');
+                itemCarrinho.classList.add('item-carrinho');
+
+                itemCarrinho.innerHTML = `
+                    <div class="item">                        
+                        <img src="https://picsum.photos/300/500" alt="Imagem do Produto" class="item-img">
+                        <div class="item-info">
+                            <h2>${produto.nome}</h2>
+                            <p class="preco">${produto.preco}</p>
+                            <label>Quantidade:</label>
+                            <input type="number" min="1" value="${produto.quantidade}" class="quantidade">
+                        <div>
+                    </div>
+                    <button class="botao-remover">Remover</button>
+                `;
+                const botaoRemover = itemCarrinho.querySelector('.botao-remover');
+                botaoRemover.addEventListener('click', () => removerItem(index));
+
+                listaCarrinho.appendChild(itemCarrinho);
+            });
+        }        
+        document.addEventListener('DOMContentLoaded', carregarCarrinho);
+
+    </script>
+
+</body>
+
+</html>
