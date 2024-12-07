@@ -18,18 +18,9 @@ document.querySelectorAll('input[type="number"]').forEach((input, index) => {
         console.log(nomeProduto);
         carrinho.forEach((produto, indexProduto) => {
             if (produto.nome === nomeProduto) {
-                if (novaQuantidade === 0) {
-                    carrinho.splice(indexProduto, 1);
-                    const itemCarrinho = evento.target.closest('.item-carrinho');
-                    if (itemCarrinho) {
-                        itemCarrinho.remove();//aqui removea a div inteira
-                    }
-                } else {
-                    produto.quantidade = novaQuantidade;
-                }
+                produto.quantidade = novaQuantidade;
             }
         });
-        
         somaItensCarrinho(carrinho);
         somaValorCarrinho(carrinho);
         localStorage.setItem('carrinho', JSON.stringify(carrinho));
