@@ -14,122 +14,20 @@
         <div class="carrinho-badge">
             <a href="#">
                 <i class="bi bi-cart icone-carrinho"></i>
-                <span class="contador">3</span>
+                <span class="contador">0</span>
             </a>
         </div>
     </header>
 
     <main class="carrinho">
 
-        <!-- item 1 -->
-
+        
         <div class="total">
-            <p></p>
+            <p>Total: R$ 50,00</p>
             <button class="botao-comprar">Finalizar Compra</button>
         </div>
     </main>
-    <script type="module">
-        import { somarProdutos, obterTodosProdutos, atualizarContador, adicionarProdutoAoCarrinho } from './script.js';
-        let carrinho = obterTodosProdutos()
-        let elementosNoCarrinho = carrinho.length;
-        let quant = document.querySelector('.contador');
-        let contador = document.querySelector('.contador')
-        let total = document.querySelector('.total p')
-        for (let index = 0; index < elementosNoCarrinho; index++) {
-            criarItemCarrinho(carrinho[index])
-            let totais = somarProdutos();
-            contador.innerText = atualizarContador()
-            let totalFormatado = (totais.somaPreco / 100).toFixed(2).replace('.', ','); // Dividi por 100 pq não tava saindo certo nessa bomba mds
-            total.innerText = `Total: ${totalFormatado || 'R$: 0,00'}`;// se n tiver nada aqui no valor ai fica zero msm
-
-        }
-        
-        for (let index = 0; index < 4; index++) {
-            let totais = somarProdutos();
-            contador.innerText = totais.somaQuantidade;
-            botaoAdicionar[index].addEventListener('click', (evento) =>{
-                evento.preventDefault()//para evitar q o link v apara outra página
-                let produtoExiste = false
-        for (let i = 0; i < carrinho.length; i++) {
-            let produto = carrinho[i];
-            if (produto.nome == produtoItemNome[index].textContent) {
-                produto.quantidade ++
-                produtoExiste = true
-            }
-        }
-        if (!produtoExiste) {
-            let produto = {
-            "nome": produtoItemNome[index].textContent,
-            "preco": produtoItemPreco[index].textContent,
-            "quantidade": 1
-            }
-            carrinho.push(produto)
-        }
-        localStorage.setItem('carrinho', JSON.stringify(carrinho))
-        totais = somarProdutos();
-        contador.innerText = totais.somaQuantidade;
-    })  
-}
-
-
-
-        function criarItemCarrinho(produto){
-            const itemCarrinho = document.createElement('div');
-            itemCarrinho.classList.add('item-carrinho');
-
-            const botaoRemover = document.createElement('button');
-            botaoRemover.classList.add('botao-remover');
-            botaoRemover.textContent = 'Remover';
-
-            const item = document.createElement('div');
-            item.classList.add('item');
-
-            const itemImg = document.createElement('img');
-            itemImg.src = 'https://picsum.photos/300/500';
-            itemImg.classList.add('item-img');
-
-            const itemInfo = document.createElement('div');
-            itemInfo.classList.add('item-info');
-
-            const nomeProduto = document.createElement('h2');
-            nomeProduto.textContent = produto.nome;
-
-            const preco = document.createElement('p');
-            preco.classList.add('preco');
-            preco.textContent = produto.preco;
-            
-            const quantidade = document.createElement('label');
-            quantidade.textContent = 'Quantidade:';
-
-            const inputQuantidade = document.createElement('input');
-            inputQuantidade.type = 'number';
-            inputQuantidade.id = 'quantidade';
-            inputQuantidade.min = '1';
-            inputQuantidade.value = produto.quantidade
-
-            //tem que adiciona saui os bagulho/tag denreo da class 
-            item.appendChild(itemImg)
-
-            itemInfo.appendChild(nomeProduto)
-            itemInfo.appendChild(quantidade)
-            itemInfo.appendChild(inputQuantidade)
-            itemInfo.appendChild(preco)
-
-            item.appendChild(itemInfo)
-           
-
-            itemCarrinho.appendChild(item)//o item tem que add nessa ordem se n o botao vai primeiro
-            itemCarrinho.appendChild(botaoRemover)
-            //mds quanta  div dentro de div AAA SOCORRO
-
-            
-
-            
-            let carrinhoDiv = document.querySelector('.carrinho')
-            carrinhoDiv.prepend(itemCarrinho)//esse prepend aqui faz com que adicione logo no começo do main, assim o preço n fica la em cima tudo errado
-        }
-      
-        
+    <script  src="carrinho.js">
     </script>
 
 </body>
