@@ -13,7 +13,7 @@ document.querySelectorAll('input[type="number"]').forEach((input, index) => {
         carrinho = obterTodosProdutos();
         const produtoItemNome = document.querySelectorAll('.item-info h2');
         let nomeProduto = produtoItemNome[index].textContent;
-        let novaQuantidade = parseInt(evento.target.value);//ele pega onde eu cliquei e o valor
+        let novaQuantidade = parseInt(evento.target.value);//ele pega onde eu cliquei e o valore tem q usar o aprseint pq o valor ta como string
 
         console.log(nomeProduto);
         carrinho.forEach((produto, indexProduto) => {
